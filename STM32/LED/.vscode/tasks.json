@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build",
+			"command": "make",
+			"args": [
+			]
+		},
+		{
+			"type": "shell",
+			"label": "Update",
+			"command": "openocd",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"args": [
+				"-f",
+				"C:/openocd/scripts/interface/stlink-v2.cfg",
+				"-f",
+				"C:/openocd/scripts/target/stm32f1x.cfg",
+				"-c",
+				"program build/${workspaceFolderBasename}.elf verify reset exit"
+			]
+
+		},
+		{
+			"label": "Build & Update",
+			"dependsOn":[
+				"Build",
+				"Update"
+			]
+		}
+	]
+}
