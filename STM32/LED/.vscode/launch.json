@@ -5,34 +5,49 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
+            "name": "MCU debug",
             "type": "cppdbg",
             "request": "launch",
-            "miDebuggerPath": "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/bin/arm-none-eabi-gdb.exe",
-            "targetArchitecture": "arm",
             "program": "${workspaceRoot}/build/LED.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/ARM_compile/bin/arm-none-eabi-gdb.exe",
+            "targetArchitecture": "arm",
+            "preLaunchTask": "run openocd",
+            "postDebugTask": "close openocd",
+            "launchCompleteCommand": "None",
             "setupCommands": [
                 {
-                    "text": "file 'C:/Users/Jerry/Desktop/STM32/LED/build/LED.elf'"
+                    "description": "connect GDB serve",
+                    "text": "target remote localhost:3333",
+                    "ignoreFailures": false
                 },
                 {
-                    "text": "target remote localhost:3333"  //连接Openocd
+                    "description": "select excutable file(.elf) for GDB",
+                    "text": "file 'C:/Wenjie/MyGitHub/Jerry/STM32/LED/build/LED.elf",
+                    "ignoreFailures": false
                 },
                 {
-                    "text": "monitor reset halt"  //复位
+                    "description": "Halt",
+                    "text": "mon halt",
+                    "ignoreFailures": false
                 },
                 {
-                    "text": "load"  //加载文件
+                    "description": "Reset MCU",
+                    "text": "mon reset init",
+                    "ignoreFailures": false
                 },
                 {
-                    "text": "break main"  //跳转main
+                    "description": "Upload code to MCU",
+                    "text": "load",
+                    "ignoreFailures": false
                 }
-            ],
-            //"preLaunchTask": "Build & Update",       //调试开始之前，运行debug
-            //"postDebugTask": "stop_debug",  //调试结束之后，运行stop_debug
-            "launchCompleteCommand": "None",
-            "externalConsole": true,
-            "cwd": "${workspaceRoot}"
+            ]
         }
-    ]
+    ],
+
 }

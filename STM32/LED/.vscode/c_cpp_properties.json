@@ -3,8 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc/"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -13,29 +12,9 @@
                 "USE_HAL_DRIVER",
                 "STM32F103xE"
             ],
-            "compilerPath": "C:/mingw64/bin/gcc.exe",
+            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++14",
-            "intelliSenseMode": "gcc-arm",
-            "compilerArgs": [],
-            "configurationProvider": "ms-vscode.cmake-tools"
-        },
-        {
-            "name": "STM32",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "C:/ARM_compile/arm-none-eabi/include/**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "USE_HAL_DRIVER ",
-                "STM32F103xE"
-            ],
-            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
             "intelliSenseMode": "gcc-arm"
         }
     ],
