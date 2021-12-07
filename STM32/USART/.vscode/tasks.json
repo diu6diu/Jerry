@@ -1,0 +1,26 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "make",
+            "args": [
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "Upload",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "C:/openocd/scripts/interface/stlink-v2.cfg",
+                "-f",
+                "C:/openocd/scripts/target/stm32f1x.cfg",
+                "-c",
+                "program build/${workspaceFolderBasename}.elf verify reset exit"
+            ],
+            "dependsOn":["build"]
+        },
+    ],
+    "version": "2.0.0"
+}
