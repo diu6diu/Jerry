@@ -1,0 +1,53 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MCU debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/MyLeb.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/ARM_compile/bin/arm-none-eabi-gdb.exe",
+            "targetArchitecture": "arm",
+            "preLaunchTask": "run openocd",
+            "postDebugTask": "close openocd",
+            "launchCompleteCommand": "None",
+            "setupCommands": [
+                {
+                    "description": "connect GDB serve",
+                    "text": "target remote localhost:3333",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "select excutable file(.elf) for GDB",
+                    "text": "file 'C:/Wenjie/MyGitHub/Jerry/STM32/STM32F1x_Demo/MyLeb/build/MyLeb.elf",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Halt",
+                    "text": "mon halt",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Reset MCU",
+                    "text": "mon reset init",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Upload code to MCU",
+                    "text": "load",
+                    "ignoreFailures": false
+                }
+            ]
+        }
+    ],
+
+}
