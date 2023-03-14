@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Can</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write'  class=''><h1><a name="can-communication" class="md-header-anchor"></a><span>Can Communication</span></h1><ul><li><p><a href='#can-communication'><span>Can Communication</span></a></p><ul><li><p><a href='#can-background-knowledge'><span>Can Background Knowledge</span></a></p><ul><li><p><a href='#brief-intro'><strong><em><span>Brief Intro</span></em></strong></a></p><ul><li><a href='#can-总线结构和控制单元'><strong><em><span>CAN 总线结构和控制单元</span></em></strong></a></li><li><a href='#can-总线信号'><strong><em><span>CAN 总线信号</span></em></strong></a></li><li><a href='#canfd-standard-format'><strong><em><span>CanFD Standard Format</span></em></strong></a></li><li><a href='#contention-based-arbitration-基于竞争的仲裁机制'><strong><em><span>Contention-based arbitration 基于竞争的仲裁机制</span></em></strong></a></li><li><a href='#sample-point'><strong><em><span>Sample Point</span></em></strong></a></li><li><a href='#同步'><strong><em><span>同步</span></em></strong></a></li></ul></li><li><p><a href='#davinci-model'><span>DaVinci Model</span></a></p><ul><li><a href='#can'><span>Can</span></a></li><li><a href='#canif'><span>CanIf</span></a></li><li><a href='#pdur'><span>PduR</span></a></li><li><a href='#com'><span>Com</span></a></li><li><a href='#comxf'><span>ComXf</span></a></li><li><a href='#ipdum'><span>IpduM</span></a></li></ul></li></ul></li><li><p><a href='#full-can-and-basic-can'><span>Full Can and Basic Can</span></a></p><ul><li><a href='#can-module与can-nodecontroller关系'><strong><em><span>CAN Module与CAN Node、Controller关系</span></em></strong></a></li><li><a href='#controller与transceiver关系'><strong><em><span>Controller与Transceiver关系</span></em></strong></a></li><li><a href='#controller与ram资源关系'><strong><em><span>Controller与RAM资源关系</span></em></strong></a></li><li><a href='#mailboxhrhhwobject'><strong><em><span>Mailbox、HRH、HWObject</span></em></strong></a></li><li><a href='#fullcan和basiccan是什么'><strong><span>FullCAN和BasicCAN是什么</span></strong></a></li></ul></li><li><p><a href='#can-bus-off'><span>Can Bus off</span></a></p><ul><li><p><a href='#busoff-background-knowledge'><span>Busoff Background Knowledge</span></a></p><ul><li><p><a href='#can-错误处理机制'><strong><em><span>CAN 错误处理机制</span></em></strong></a></p><ul><li><a href='#错误类型'><span>错误类型</span></a></li><li><a href='#错误计数器'><span>错误计数器</span></a></li><li><a href='#错误状态'><span>错误状态</span></a></li><li><a href='#错误恢复'><span>错误恢复</span></a></li></ul></li></ul></li><li><p><a href='#state-machine'><span>State Machine</span></a></p></li></ul></li></ul></li></ul><h2><a name="can-background-knowledge" class="md-header-anchor"></a><span>Can Background Knowledge</span></h2><h3><a name="brief-intro" class="md-header-anchor"></a><strong><em><span>Brief Intro</span></em></strong></h3><h4><a name="can-总线结构和控制单元" class="md-header-anchor"></a><strong><em><span>CAN 总线结构和控制单元</span></em></strong></h4><p><img src="./CanStruct.drawio.png" referrerpolicy="no-referrer" alt="Can Structure"></p><h4><a name="can-总线信号" class="md-header-anchor"></a><strong><em><span>CAN 总线信号</span></em></strong></h4><blockquote><p><span>CAN总线上，采用差分共轭信号，通过CAN_H和CAN_L线上的电位差来表示CAN信号，分为显性电平(dominant)和隐性电平(recessive)两种类型。其中显性电平规定为逻辑0，隐性电平则为逻辑1。其具体定义可通过下图来理解。</span>
+<img src="./Can_Characteristic.png" referrerpolicy="no-referrer" alt="Can Structure"></p></blockquote><h4><a name="canfd-standard-format" class="md-header-anchor"></a><strong><em><span>CanFD Standard Format</span></em></strong></h4><p><img src="./CanFrameFormat.drawio.png" referrerpolicy="no-referrer" alt="Can Frame Format"></p><ul><li><p><strong><em><span>SOF</span></em></strong><span>: 节点发送帧时, 发送的第一个部分为帧开始的部分，表现为显性状态。这一部分被称为 SOF（Start Of Frame）。在SOF，CAN FD与CAN相同，仅有1bit的“显性”位。只有总线空闲时才允许节点发送信号，发送时，SOF将总线从隐性（1）改变为显性（0），所有节点必须同步于首先开始发送报文的节点的帧起始前沿。</span></p></li><li><p><strong><em><span>Arbitration Field</span></em></strong><span>: Identifier + RRS</span></p><ul><li><span>Identifier识别符可用于区别消息的同时又可以表示消息的优先级。</span></li><li><span>RRS位（Remote Request Substitution）远程请求替换位：即传统CAN中的RTR位。CAN FD取消了对远程帧的支持，用RRS位替换了RTR位，为常显性。</span></li></ul></li><li><p><strong><em><span>Control Field</span></em></strong><span>：CAN FD的控制场由IDE位、FDF位、RES位、BRS位和ESI位构成。</span></p><ul><li><span>IDE位表示扩展帧标志，res位为预留位。</span></li><li><span>FDF位（FD Format Indicator）：</span>
+<span>FDF位在CAN的数据帧中位显性（0），在CAN FD的帧中常为隐形（1），表示CAN FD报文；</span></li><li><span>BRS位（Bit Rate Switch）：位速率转换开关</span>
+<span>当BRS为隐形位（1）时，表示转换可变速率，即发送节点在BRS位的采样点，将会切换到高速传输的时钟模式，其他接收节点也必须转换位时钟模式。在CRC界定符的采样点，所有节点的波特率将会再切换回仲裁场的波特率。也就是说，所有CAN FD节点都有两种类型的波特率。</span></li><li><span>ESI（Error State Indicator）：错误状态指示</span>
+<span>ESI是指示发送节点的错误状态的标志，当发送节点的错误状态是激活时，发送隐性位（1），如果错误状态未激活时，发送显性位（0）。通过ESI位，所有节点都可以确认当前的传输节点的错误状态。</span></li><li><span>DLC：Data Length Code</span></li></ul></li><li><p><strong><em><span>Data Field</span></em></strong><span>: 数据场由数据帧里的发送数据组成，在数据场中设置发送数据。首先发送最高有效位(MSB)。</span></p></li><li><p><strong><em><span>Check Field</span></em></strong><span>: CRC + CRC Delimiter</span></p><ul><li><span>CRC: 注：</span><strong><span>CAN FD的CRC计算不仅要包括数据段的位，还包括来自SOF的Stuff Count和填充位。</span></strong></li><li><span>CRC Delimiter: CRC界定符是表示CRC校验场的结束。</span></li></ul></li><li><p><strong><em><span>ACK Field</span></em></strong><span>：CAN FD的ACK应答场包括应答间隙和应答界定符，其构成和CAN是相同的。不同的是，在CAN中，应答场的长度是1位，但在CAN FD，接收节点利用2位时间将其识别为有效应答。</span>
+<span>由从高速的数据场到慢速的仲裁场时，时钟切换会引起收发器相移和总线传播延迟。为了补偿其相移和延迟，相比传统的CAN，在CAN FD中多加了这额外的1位时间。在ACK之后，发送ACK界定符。这是一个表示ACK结束的分隔符，为是1位隐性位。</span></p></li><li><p><strong><em><span>EOF</span></em></strong><span>: 每一个数据帧均由一标志序列界定，这个标志序列由7个“隐性”位组成。CAN FD的帧结尾与CAN相同。</span></p></li></ul><h4><a name="contention-based-arbitration-基于竞争的仲裁机制" class="md-header-anchor"></a><strong><em><span>Contention-based arbitration 基于竞争的仲裁机制</span></em></strong></h4><blockquote><ul><li><span>由硬件特性决定，被称为线与得仲裁机制。ID越小的信号优先级越高。</span>
+<img src="./Arbitration.drawio.png" referrerpolicy="no-referrer" alt="Contention-bases arbitration"></li></ul></blockquote><ul><li><span>线与机制</span></li></ul><figure><table><thead><tr><th style='text-align:center;' ><span>Node A</span></th><th style='text-align:center;' ><span>Node B</span></th><th style='text-align:center;' ><span>Bus Level</span></th></tr></thead><tbody><tr><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>0</span></td></tr><tr><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>0</span></td></tr><tr><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>0</span></td></tr><tr><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>1</span></td></tr></tbody></table></figure><ul><li><span>回读机制</span></li></ul><figure><table><thead><tr><th style='text-align:center;' ><span>发送端</span></th><th style='text-align:center;' ><span>总线</span></th><th style='text-align:center;' ><span>解释</span></th></tr></thead><tbody><tr><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>继续发送</span></td></tr><tr><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>错误</span></td></tr><tr><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>0</span></td><td style='text-align:center;' ><span>停止发送</span></td></tr><tr><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>1</span></td><td style='text-align:center;' ><span>继续发送</span></td></tr></tbody></table></figure><h4><a name="sample-point" class="md-header-anchor"></a><strong><em><span>Sample Point</span></em></strong></h4><p><img src="./SamplePoint.png" referrerpolicy="no-referrer" alt="Sample Point"></p><ol start='' ><li><p><span>位时序</span>
+<span>首先我们需要了解Tq的概念，Tq是can控制器的最下时间周期称作时间份额（Time quantum，简称Tq）,它是通过芯片晶振周期分频而来。传输的个bit位由若干个Tq组成。一个位可分为4段，分别为：</span></p><ul><li><span>同步段(SS：Synchronization Segment)</span></li><li><span>传播时间段(PTS：Propagation Time Segment)</span></li><li><span>相位缓冲段1(PBS1：Phase Buffer Segment 1)</span></li><li><span>相位缓冲段2(PBS2：Phase Buffer Segment 2)</span></li></ul></li><li><p><span>采样点</span></p><div contenteditable="false" spellcheck="false" class="mathjax-block md-end-block md-math-block md-rawblock" id="mathjax-n802" cid="n802" mdtype="math_block"><div class="md-rawblock-container md-math-container" tabindex="-1"><div class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-2-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="41.982ex" height="6.079ex" viewBox="0 -1560 18075.4 2617.5" role="img" focusable="false" style="vertical-align: -2.456ex; max-width: 100%;"><defs><path stroke-width="0" id="E2-MJMATHI-53" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path><path stroke-width="0" id="E2-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path><path stroke-width="0" id="E2-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="0" id="E2-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path><path stroke-width="0" id="E2-MJMATHI-6C" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path><path stroke-width="0" id="E2-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path><path stroke-width="0" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path stroke-width="0" id="E2-MJMATHI-6F" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path><path stroke-width="0" id="E2-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path><path stroke-width="0" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="0" id="E2-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path><path stroke-width="0" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="0" id="E2-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="0" id="E2-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path stroke-width="0" id="E2-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path stroke-width="0" id="E2-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path><path stroke-width="0" id="E2-MJMATHI-45" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path stroke-width="0" id="E2-MJMATHI-47" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path><path stroke-width="0" id="E2-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path stroke-width="0" id="E2-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#E2-MJMATHI-53" x="0" y="0"></use><use xlink:href="#E2-MJMATHI-61" x="645" y="0"></use><use xlink:href="#E2-MJMATHI-6D" x="1174" y="0"></use><use xlink:href="#E2-MJMATHI-70" x="2052" y="0"></use><use xlink:href="#E2-MJMATHI-6C" x="2555" y="0"></use><use xlink:href="#E2-MJMATHI-65" x="2853" y="0"></use><use xlink:href="#E2-MJMATHI-50" x="3319" y="0"></use><use xlink:href="#E2-MJMATHI-6F" x="4070" y="0"></use><use xlink:href="#E2-MJMATHI-69" x="4555" y="0"></use><use xlink:href="#E2-MJMATHI-6E" x="4900" y="0"></use><use xlink:href="#E2-MJMATHI-74" x="5500" y="0"></use><use xlink:href="#E2-MJMAIN-3D" x="6138" y="0"></use><g transform="translate(6916,0)"><g transform="translate(397,0)"><rect stroke="none" width="10640" height="60" x="0" y="220"></rect><g transform="translate(2370,715)"><use xlink:href="#E2-MJMAIN-28" x="0" y="0"></use><use xlink:href="#E2-MJMAIN-31" x="389" y="0"></use><use xlink:href="#E2-MJMAIN-2B" x="1111" y="0"></use><use xlink:href="#E2-MJMATHI-54" x="2111" y="0"></use><use xlink:href="#E2-MJMATHI-53" x="2815" y="0"></use><use xlink:href="#E2-MJMATHI-45" x="3460" y="0"></use><use xlink:href="#E2-MJMATHI-47" x="4224" y="0"></use><use xlink:href="#E2-MJMAIN-31" x="5010" y="0"></use><use xlink:href="#E2-MJMAIN-29" x="5510" y="0"></use></g><g transform="translate(60,-716)"><use xlink:href="#E2-MJMAIN-28" x="0" y="0"></use><use xlink:href="#E2-MJMAIN-31" x="389" y="0"></use><use xlink:href="#E2-MJMAIN-2B" x="1111" y="0"></use><use xlink:href="#E2-MJMATHI-54" x="2111" y="0"></use><use xlink:href="#E2-MJMATHI-53" x="2815" y="0"></use><use xlink:href="#E2-MJMATHI-45" x="3460" y="0"></use><use xlink:href="#E2-MJMATHI-47" x="4224" y="0"></use><use xlink:href="#E2-MJMAIN-31" x="5010" y="0"></use><use xlink:href="#E2-MJMAIN-2B" x="5732" y="0"></use><use xlink:href="#E2-MJMATHI-54" x="6732" y="0"></use><use xlink:href="#E2-MJMATHI-53" x="7436" y="0"></use><use xlink:href="#E2-MJMATHI-45" x="8081" y="0"></use><use xlink:href="#E2-MJMATHI-47" x="8845" y="0"></use><use xlink:href="#E2-MJMAIN-32" x="9631" y="0"></use><use xlink:href="#E2-MJMAIN-29" x="10131" y="0"></use></g></g></g></g></svg></span></div><script type="math/tex; mode=display" id="MathJax-Element-2">Sample Point = \frac{(1+TSEG1)}{(1+TSEG1+TSEG2)}</script></div></div></li><li><p><span>延迟(TDC)</span>
+<span>SSP：二次采样点。用于估算收发延迟。</span><em><span>Ref. AURIXTC3XX_um_part2_v1.2.0</span></em></p><blockquote><p><span>During the data phase of a CAN FD transmission only one node is transmitting, all others are receivers. The length of the bus line has no impact. When transmitting via pin TXD the protocol controller receives the transmitted data from its local CAN transceiver via pin RXD. The received data is delayed by the CAN transmitter delay. In case this delay is greater than TSEG1 (time segment before sample point), a bit error is detected. In order to enable a data phase bit time that is even shorter than the transmitter delay, the delay compensation is introduced. Without transmitter delay compensation, the bit rate in the data phase of a CAN FD frame is limited by the transmitter dela.</span></p><p><span>The received bit is compared against the transmitted bit at the Secondary Sample Point. The Secondary Sample Point position is defined as the sum of the measured delay from the M_CAN’s transmit output TX through the transceiver to the receive input RX plus </span><strong><em><span>the transmitter delay compensation offset as configured by TDCRi (i=0- 3).TDCO</span></em></strong><span>. The transmitter delay compensation offset is used to adjust the position of the SSP inside the received bit (e.g. half of the bit time in the data phase). The position of the secondary sample point is rounded down to the next integer number of mtq.PSRi.TDCV shows the actual transmitter delay compensation value. PSRi (i=0- 3).TDCV is cleared when CCCRi.INIT is set and is updated at each transmission of an FD frame while DBTPi (i=0- 3).TDC is set.</span></p></blockquote></li></ol><p><span>  </span><img src=".\SSP.png" referrerpolicy="no-referrer" alt="Second Sample Point"></p><h4><a name="同步" class="md-header-anchor"></a><strong><em><span>同步</span></em></strong></h4><p><span>CAN同步的策略CAN同步是以位为单位，每接收一个下降沿，则进行一次同步。发送单元以约定好的位时序进行数据发送。接收单元根据总线上接收到的下降沿进行位时序同步。</span>
+<span>但是，发送节点和接收节点作为互相独立的硬件个体，时钟频率误差、传输路径上的（电缆、驱动器等）相位延迟等都会引起时序偏差。因此接收单元需通过硬同步或者重同步的方法进行位时序调整。</span></p><p><span>1、硬同步：接收单元在总线空闲状态检测出第一个下降沿时（对应报文的SOF下降沿）进行的同步调整。在检测到SOF的下降沿时，直接将此下降沿的位置认为是SS段，然后按照位时序对信号进行采样，达到同步的效果。</span></p><p><span>2、重同步：硬同步只是在总线空闲时检测出下降沿（帧起始）时进行，后续CAN报文数据位的同步则需要通过调整位时序来进行重同步。在接收过程中检测出总线上的下降沿来临时，根据SJW值通过加长PBS1段，或缩短PBS2段，以调整同步。但如果发生了超出SJW值的误差时，最大调整量不能超过SJW值。</span></p><h3><a name="davinci-model" class="md-header-anchor"></a><span>DaVinci Model</span></h3><h4><a name="can" class="md-header-anchor"></a><span>Can</span></h4><p><span>Can模块中一些配置项介绍：</span></p><figure><table><thead><tr><th style='text-align:left;' ><span>Item</span></th><th style='text-align:left;' ><span>Description</span></th><th style='text-align:left;' ><span>Reference</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>Basis Address Enum</span></td><td style='text-align:left;' ><span>当前节点使用的是哪一个Can Controller.</span></td><td style='text-align:left;' ><span>TechnicalReference_CAN_Tricore_MCAN.pdf Chapter 6.2 &amp;&amp; AURIXT3XX_um_part2_V1.2.0 Page 1940</span></td></tr><tr><td style='text-align:left;' ><span>Common CAN</span></td><td style='text-align:left;' ><span>允许使用两个物理Can通道作为一个CAN节点，扩展了Buffer。前提是硬件支持。</span></td><td style='text-align:left;' >&nbsp;</td></tr><tr><td style='text-align:left;' ><span>TTCAN</span></td><td style='text-align:left;' ><span>Can的高层协议，实时性更高，TC397支持，TC357不支持</span></td><td style='text-align:left;' >&nbsp;</td></tr><tr><td style='text-align:left;' ><span>Enable optimizations for hardware buffer lengths</span></td><td style='text-align:left;' ><span>FullCAN对象的硬件缓冲区被限制为实际要接收的消息的帧长度。如果接收到帧长较大的CAN-FD消息，驱动程序可能会丢弃这些消息。如果禁用此功能，则将硬件缓冲区配置为能够接收所有消息的最大大小。</span></td><td style='text-align:left;' >&nbsp;</td></tr><tr><td style='text-align:left;' ><span>Interrupt Category</span></td><td style='text-align:left;' ><span>1和2都是做为中断函数直接由OS管理。2只支持AutoSar/OSEK OS</span></td><td style='text-align:left;' >&nbsp;</td></tr><tr><td style='text-align:left;' ><span>Interrupt Lock</span></td><td style='text-align:left;' ><span>中断由哪个模块管理。</span></td><td style='text-align:left;' ><span>TechnicalReference_CAN_Tricore_MCAN.pdf Chapter 6.2</span></td></tr><tr><td style='text-align:left;' ><span>Rx Queue</span></td><td style='text-align:left;' >&nbsp;</td><td style='text-align:left;' >&nbsp;</td></tr><tr><td style='text-align:left;' ><span>Safe Bsw Checks</span></td><td style='text-align:left;' ><span>This attribute has to be enabled for safety projects where this component is mapped to an ASIL partition.</span></td><td style='text-align:left;' >&nbsp;</td></tr></tbody></table></figure><h4><a name="canif" class="md-header-anchor"></a><span>CanIf</span></h4><ul><li><span>Tx Buffer Handling Type: 一般选择PRIO_BY_CANID即可, 但有些情况例外，比如有复用信号时。因为PRIO_BY_CANID的Buffer使用的是O(1)的查表法。</span></li></ul><h4><a name="pdur" class="md-header-anchor"></a><span>PduR</span></h4><ul><li><span>整个模块是一张路由器表，描述了每个Ipdu从那里来到那里去的信息。一般由DaVinci自行生成即可。</span></li></ul><h4><a name="com" class="md-header-anchor"></a><span>Com</span></h4><ul><li><span>负责收发Ipdu的模块。</span></li></ul><h4><a name="comxf" class="md-header-anchor"></a><span>ComXf</span></h4><ul><li><span>归一化Signal Group，方便E2E的计算</span></li></ul><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="C"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="c"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">typedef</span> <span class="cm-keyword">struct</span> <span class="cm-def">DataTypeA</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">Data_1</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">Data_2</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">CRC</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">typedef</span> <span class="cm-keyword">struct</span> <span class="cm-def">DataTypeB</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">{</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">Data_2</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">Data_1</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">u8_t</span> <span class="cm-variable">CRC</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 276px;"></div><div class="CodeMirror-gutters" style="display: none; height: 276px;"></div></div></div></pre><p><span>如果直接使用以上两个结构体声明的变量，他们计算出的CRC是不一样的，因此需要由ComXf统一起来。</span></p><h4><a name="ipdum" class="md-header-anchor"></a><span>IpduM</span></h4><ol start='' ><li><p><em><span>DBC配置</span></em></p><p><span>将选择信号配置为Multiplexor Signal, 动态部分配置为Multiplexd Signal，静态部分配置为Signal。</span></p><p><strong><em><span>Multiplexor Signal必须是Enum类型，并且需要独立于Signal Group之外。</span></em></strong></p><p><img src=".\Can_MultiplexSignal.png" referrerpolicy="no-referrer" alt="image-20230309131821100"></p><p><span>Multiplexed Signal还需要配置Multiplex Value, 即对应Multiplexor Signal的哪个值。所有配置了相同Multiplex Value的Signals会被组合成一个Ipdu。</span></p><p><img src=".\DBC_MultiplexedSignal.png" referrerpolicy="no-referrer" alt="image-20230309132335597"></p><p><span>导入DaVinci后即可正确生成IpduM模块。</span></p><p><span>*</span><strong><em><span>一些局限性</span></em></strong><span> :</span></p><ul><li><span>DaVinci无法为复用信号生成E2E检查</span></li><li><span>DaVinci默认扩展Ipud Group的周期</span></li></ul></li><li><p><em><span>DaVinci 配置项</span></em></p><ul><li><p><span>IpduM:</span></p><ul><li><span>Tx Trigger Mode: 一般选择DYNAMIC_PART_TRIGGER.即动态数据更新后IpduM模块就会将数据发送到下一层。</span></li></ul></li><li><p><span>Com：</span></p><ul><li><p><span>ComConfig-&gt;ComIPdus:</span></p><ul><li><span>Tx Mode Time Offset &amp;&amp; Tx Mode Time Period: 每个Ipdu的发送时间和周期，生成的默认值不契合我们的软件策略，需要手动修改。</span></li></ul></li></ul></li><li><p><span>Rte:</span></p><ul><li><span>IpduM有自己的MainFunction, 需要在RTE中指定Main function的位置。为保证实时性，建议尽量靠近Com Main function.</span></li></ul></li></ul></li><li><p><em><span>功能简介</span></em></p></li></ol><p><span>IpduM模块负责将从COM接收到的适当的Signal与发送回发送端路由器的新的多路复用I-PDU相结合。在接收端，它负责解释多路复用I-PDU的内容，并考虑选择器字段的值，通过I-PDU为COM提供适当的分离I-PDU。IpduM有一个选择字段，选择字段可以根据多路器的需要来配置，长度为1 bit - 16 bits之间，典型的选择字段的长度是4bits。</span></p><hr /><h2><a name="full-can-and-basic-can" class="md-header-anchor"></a><span>Full Can and Basic Can</span></h2><h3><a name="can-module与can-nodecontroller关系" class="md-header-anchor"></a><strong><em><span>CAN Module与CAN Node、Controller关系</span></em></strong></h3><p><span>在芯片手册中（Data Sheet），一个CAN Module会包含多个Node（即，Controller）。比如：TC357芯片手册中，MCMCANModule包含2个CAN Module，每个Module包含4个Controller，如下所示：</span></p><p><img src="./CanModule.drawio.png" referrerpolicy="no-referrer" alt="Can Module"></p><h3><a name="controller与transceiver关系" class="md-header-anchor"></a><strong><em><span>Controller与Transceiver关系</span></em></strong></h3><p><span>在实际的使用中，一个Controller必须配一个Transceiver，Controller+Transceiver = Network，如下所示：</span></p><p><img src="./Relationship_between_CanController_and_Transceiver.jpg#pic_center" alt="Can Controller and Transceiver"  /></p><p><span>所以，平时我们口语话的“3路CAN”是指3个Controller+Transceiver组合，即：3个Network，我们也常称“3个节点”。</span></p><h3><a name="controller与ram资源关系" class="md-header-anchor"></a><strong><em><span>Controller与RAM资源关系</span></em></strong></h3><p><span>刚提到，TC357中，一个CAN Module包含4个Controller，那每个Controller可以发送多少个CAN报文，接收多少个CAN 报文呢？这里我们要区分硬件缓存CAN报文的数量和项目中要求发送/接收报文的数量。</span></p><p><span>硬件缓存CAN报文数量：是指上层请求发送报文或者接收报文时，CAN驱动最多能缓存的数量；</span>
+<span>项目中要求发送/接收报文的数量：是指当前节点要外发或者接收的报文数量。</span>
+<span>以发送CAN报文数量为例：需求要求当前网络节点发送100帧CanID不同的CAN报文，实际该节点CAN Controller可用的硬件发送缓存区最多有32，意味着底层硬件最多缓存32帧发送报文，如果超过32帧发送请求，则会因没有硬件空间缓存而发送请求失败。</span></p><p><span>TC357 CAN Module资源情况如下所示：</span><em><span>Ref. TC35X_um_appx_V1.1.0.pdf</span></em></p><p><img src=".\TC357_MCMCAN.png" referrerpolicy="no-referrer" alt="TC357_MCMCAN"></p><p><span>提示：上图中的Controller用“Node”表示。由上可以看出，２个CAN Module，共８个Controller。每个CAN Controller可用32个发送Tx Buffer...对于发送缓冲区，每个CAN Controller可用32个发送缓冲区，如果配置了32个Tx Dedicated Buffer，则没有空间配置Tx FIFO/Queue。一般，Tx Buffer配置时，会混合使用，比如：</span></p><p><span>20 Tx Dedicated Buffer+ 12 Tx Queue</span>
+<span>MCMCANModule RAM区地址划分顺序如下所示：</span><em><span>Ref. AURIXTC3XX_um_part2_v1.2.0</span></em></p><p><img src=".\MCMCANModule_RAM.jpg" referrerpolicy="no-referrer" alt="image-20230310132646731"></p><h3><a name="mailboxhrhhwobject" class="md-header-anchor"></a><strong><em><span>Mailbox、HRH、HWObject</span></em></strong></h3><p><strong><span>Mailbox</span></strong><span>：邮箱，就是CAN驱动所具有的接收缓存区和发送缓存区，接收缓存区和发送缓存区均在RAM区。</span></p><p><strong><span>HWObject</span></strong><span>：硬件对象，包含CAN ID、DLC、Data等信息的RAM区。</span></p><p><strong><span>HRH</span></strong><span>：Hardware Receive Handle，接收句柄，一个HRH表示一个接收HWObject。</span></p><p><strong><span>HTH</span></strong><span>：Hardware Transmit Handle，发送句柄，一个HTH表示一个发送HWObject。</span></p><p><span>Mailbox、HWObject、HRH、HTH、Controller、Transceiver之间的关系如下所示：</span></p><p><img src=".\Mailbox_HRH_HWobject.jpg" referrerpolicy="no-referrer" alt="Mailbox HRH HTH HWobject"></p><h3><a name="fullcan和basiccan是什么" class="md-header-anchor"></a><strong><span>FullCAN和BasicCAN是什么</span></strong></h3><p><span>首先，FullCAN和BasicCAN是CanIf模块配置的参数。</span></p><p><em><span>BasicCAN</span></em><span>：一个HWObject(Hardware Object)可以处理一段范围的CanId</span>
+<em><span>FullCAN</span></em><span>：一个HWObject(Hardware Object)只能处理单个CanId</span></p><p><span>Autosar对FullCAN和BasicCAN的解释如下所示：</span></p><blockquote><p><span>A CAN mailbox(Hardware Object) for FullCAN operation only enables transmission or reception of single CanIds. Accordingly, BasicCAN operation of one Hardware Object enables to transmit or receive a ranage of CanIDs.</span></p></blockquote><p><span>将上述的解释进一步细化，如下所示：</span></p><p><img src="./MessageObjects_CanHardware.png" alt="MessageObjects"  /></p><p><span>使用工程中，MCAL会将缓存区分配成FIFO和Dedicated Buffer，FIFO和Dedicated Buffer的区别是什么呢？Dedicated Buffer区域，Hareware Object与HRH/HTH一一对应，而FIFO区域，一个HRH/HTH对应多个Hareware Object，如下所示：</span></p><p><img src="./MessageObjects_CanHardware_HRH_HTH.png" alt="MessageObjects"  /></p><p><span>为什么需要FullCAN和BasicCAN？</span>
+<span>在CAN驱动层，可以通过过滤的方式，过滤一段范围内的CanID，也就是说：会有一段范围内的报文接收进来，但是接收进来的这一段范围的报文并不一定都是上层所需要的，怎么办呢？用软件方式，再过滤一遍，由CanIf过滤所需要的CAN报文。因此，提出了FullCAN和BasicCAN的概念。</span></p><p><span>比如：HRH对应BASIC CAN类型，接收CanID范围：0x10~0x18，CanIf根据过滤算法，在0x10~0x18范围内过滤出需要的0x10、0x13、0x14、0x16、0x17送给上层，而其余的丢弃，如下所示：</span></p><p><img src="./Filter.jpg" alt="Filter" style="zoom:80%;" /></p><p><span>CanIf可以通过设置CANIF_HRHRANGE_LOWER_CANID、CANIF_HRHRANGE_UPPER_CANID方式过滤，也可以通过设置CANIF_HRHRANGE_BASEID、CANIF_HRHRANGE_MASK进行过滤。</span></p><p><span>不同报文类型如何选择FULL CAN/BASIC CAN</span>
+<span>应用报文：一般选择配置成FULL CAN类型，对于应用报文，一般不需要缓存，使用最新接收的数据即可。对于发送的应用报文，都配置成FULL CAN类型需要一个前提：上层需要发送应用报文数量＜底层硬件缓存区数量。比如：底层发送硬件缓存区数量为32，节点需要发送的应用报文数量为50，显然无法将50个发送的应用报文都配置成FULL CAN。遇到这种情况，一般会将重要的应用报文配置成FULL CAN，而其他要发送的应用报文配置成BASIC CAN。这样配置以后，硬件缓存区的分配就需要混用，即：Dedicated Tx Buffers+Tx Queue或者 Dedicated Tx Buffers+Tx FIFO，如下所示：</span></p><p><img src="./Config.jpg" alt="Config Example" style="zoom:80%;" /></p><p><span>如上图，ID3、ID15、ID20是比较重要的应用报文，配置成FULL CAN，分别给一个独立的缓存区；其他的缓存区则配置成BASIC CAN，即：一个缓存区可以发送多个不同CanID的报文。</span></p><p><span>诊断报文：一般选择配置成BASIC CAN类型（结合FIFO Buffer使用），因为诊断报文的请求/响应不能错序，需按照顺序处理，且数据不能覆盖；</span></p><p><span>网络管理报文：接收一般选择配置成BASIC CAN类型，因为一个节点一般会要求接收一段范围的网络管理报文，eg:0x500~0x53F。发送网络管理报文配置成FULL/BASIC CAN类型均可，如果资源够用，推荐配置成FULL CAN类型，因为每个节点的发送网络管理报文唯一；</span></p><hr /><h2><a name="can-bus-off" class="md-header-anchor"></a><span>Can Bus off</span></h2><h3><a name="busoff-background-knowledge" class="md-header-anchor"></a><span>Busoff Background Knowledge</span></h3><h4><a name="can-错误处理机制" class="md-header-anchor"></a><strong><em><span>CAN 错误处理机制</span></em></strong></h4><h5><a name="错误类型" class="md-header-anchor"></a><span>错误类型</span></h5><ul><li><p><span>Error detection 错误检测</span></p><ul><li><span>Bit monitoring 位监控</span></li><li><span>Stuff rule check 填充规则检测</span></li><li><span>Frame form check帧格式检测</span></li><li><span>15 bit CRC CRC校验</span></li><li><span>ACK check 响应检测</span></li></ul></li><li><p><span>Error signalling 错误告知</span></p><ul><li><span>error frame 发送错误帧</span></li><li><span>Negative ACK回复隐性ACK</span></li></ul></li><li><p><span>Error Correction 错误纠正</span></p><ul><li><span>重发</span></li></ul></li></ul><h5><a name="错误计数器" class="md-header-anchor"></a><span>错误计数器</span></h5><figure><table><thead><tr><th style='text-align:center;' >&nbsp;</th><th style='text-align:left;' ><span>接收喝发送错误计数器值得变动条件</span></th><th style='text-align:center;' ><span>发送错误计数器值(TEC)</span></th><th style='text-align:center;' ><span>接收错误计数器值(REC)</span></th></tr></thead><tbody><tr><td style='text-align:center;' ><span>1</span></td><td style='text-align:left;' ><span>接收单元检测出错误时</span></td><td style='text-align:center;' ><span>-</span></td><td style='text-align:center;' ><span>+1</span></td></tr><tr><td style='text-align:center;' ><span>2</span></td><td style='text-align:left;' ><span>接收单元在发送完错误标志位后检测到得第一个标志为显性电平</span></td><td style='text-align:center;' ><span>-</span></td><td style='text-align:center;' ><span>+8</span></td></tr><tr><td style='text-align:center;' ><span>3</span></td><td style='text-align:left;' ><span>发送单元在输出错误标志时</span></td><td style='text-align:center;' ><span>+8</span></td><td style='text-align:center;' ><span>-</span></td></tr><tr><td style='text-align:center;' ><span>4</span></td><td style='text-align:left;' ><span>发送单元在发送主动错误标志或过载标志时，检测出位错误</span></td><td style='text-align:center;' ><span>+8</span></td><td style='text-align:center;' ><span>-</span></td></tr><tr><td style='text-align:center;' ><span>5</span></td><td style='text-align:left;' ><span>接收单元在发送主动错误标志或过载标志时，检测出位错误</span></td><td style='text-align:center;' ><span>-</span></td><td style='text-align:center;' ><span>+8</span></td></tr><tr><td style='text-align:center;' ><span>6</span></td><td style='text-align:left;' ><span>各单元从主动错误标志、过载标志的最开始检测出连续14个位的显性位时。之后，每检测出连续的8个位的显性位时。</span></td><td style='text-align:center;' ><span>+8</span></td><td style='text-align:center;' ><span>+8</span></td></tr><tr><td style='text-align:center;' ><span>7</span></td><td style='text-align:left;' ><span>检测出在被动标志位后追加的连续8个位的显性位时</span></td><td style='text-align:center;' ><span>+8</span></td><td style='text-align:center;' ><span>+8</span></td></tr><tr><td style='text-align:center;' ><span>8</span></td><td style='text-align:left;' ><span>发送单元正常发送数据结束时</span></td><td style='text-align:center;' ><span>-1</span></td><td style='text-align:center;' ><span>-</span></td></tr><tr><td style='text-align:center;' ><span>9</span></td><td style='text-align:left;' ><span>接收单元正常接收数据结束时</span></td><td style='text-align:center;' ><span>-</span></td><td style='text-align:center;' ><span>$$1&lt;=REC&lt;=127$$时-1,REC&gt;127,设 REC=127</span></td></tr><tr><td style='text-align:center;' ><span>10</span></td><td style='text-align:left;' ><span>处于Bus Off的单元，检测到128次连续11个位的隐性位</span></td><td style='text-align:center;' ><span>TEC=0</span></td><td style='text-align:center;' ><span>TEC=0</span></td></tr></tbody></table></figure><h5><a name="错误状态" class="md-header-anchor"></a><span>错误状态</span></h5><p><span>对于错误界定，节点存在如下三种状态：</span></p><p><span>主动错误</span>
+<span>被动错误</span>
+<span>总线关闭</span></p><p><img src=".\Node_status_transition_diagram.png" referrerpolicy="no-referrer" alt="Node_status_transition_diagram"></p><ul><li><span>主动错误：</span>
+<span>处于主动错误状态的节点能正常参与总线通信的收发，当检测到错误时将发送主动错误标志，错误标志由6个连续的显性位组成（这种连续的6个显性位与常规的填充位和其它帧固定格式不相同，正因为如此，硬件才容易区别）。</span>
+<span>如果是发送节点发送主动错误帧，这种情况相当于刚刚发送的那帧报文我发错了，我现在主动破坏它，其他节点不管接收到什么都不算数；</span>
+<span>如果是接收节点发送主动错误帧，这种情况相当于刚刚接收的那帧报文出错了，我现在主动站出来告诉大家这个错误，并把这帧报文破坏掉，刚才你们不管接收到什么都不算数</span>
+<strong><span>Tips：处于主动错误状态，说明这个节点目前是比较可靠的，出现错误的原因可能不是它本身的问题，即刚刚检测到的错误可能不仅仅只有它检测到，正因为如此，整个总线才允许它破坏正在发送中的报文。</span></strong></li><li><span>被动错误：</span>
+<span>处于被动错误状态的节点不能发送主动错误标志。它能参与正常通信，但当检测到错误时发送的是被动错误标志。被动错误标志由6个连续的隐性位组成。当发送结束后，处于被动错误状态的节点在下一次再次发送时之前需要等待一些额外时间。</span>
+<span>如果是发送节点发出被动错误帧，刚刚被发送的报文被破坏。错误帧发送完成后，接着的是帧间隔（3个隐性位）和“传输延时段”（8个隐性位），这时总线上的其他节点就可以判断总线处于空闲状态并参与总线竞争。这种机制可以让其他处于主动错误状态的节点优先使用总线。</span>
+<span>如果是接收节点发出被动错误帧，则不会对总线产生任何影响。</span>
+<strong><span>Tips：处于被动错误状态，说明这个节点目前是不可靠的，出现错误的原因可能是它本身的问题，即刚刚检测到的错误可能只有它自己检测到，正因为如此，整个总线不会信任它的报告，从而只允许它发送6个连续的隐性位，这样才不会拖累其他节点。</span></strong></li><li><span>总线关闭：</span>
+<span>处于总线关闭状态的节点不允许发送和接收任何形式的帧报文。且只能通过用户请求进行恢复。</span></li></ul><p><strong><em><span>如果总线上只有一个节点，该节点发送数据帧后得不到应答，TEC最大只能计数到128，即这种情况下节点只会进入被动错误状态而不会进入总线关闭状态。</span></em></strong></p><h5><a name="错误恢复" class="md-header-anchor"></a><span>错误恢复</span></h5><p><span>节点进入总线关闭状态后，普遍采用的是 </span><strong><span>快慢恢复</span></strong><span> 的形式：</span></p><ol start='' ><li><span>立即重新初始化 CAN 芯片；</span></li><li><span>t(tBusOffQuick 或 tBusOffSlow)时间内应暂停发送报文，分为快速恢复和慢速恢复；</span></li><li><span>恢复到正常 CAN 通信</span></li></ol><p><img src=".\BusOff_Recorver.png" referrerpolicy="no-referrer" alt="image-20230310155424134"></p><h3><a name="state-machine" class="md-header-anchor"></a><span>State Machine  </span></h3><p><img src=".\CanBusOff_State_Machine_without_TRVC.png" referrerpolicy="no-referrer" alt="image-20230310155424134"></p></div>
+</body>
+</html>

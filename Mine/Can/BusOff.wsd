@@ -1,0 +1,54 @@
+@startuml CanBusOff State Machine without TRVC
+state Init {
+    state CANSM_SD_CC_STOPPED
+    state CANSM_SD_CC_SLEEP
+    state CANSM_S_NOCOM
+}
+
+state CANSM_S_NO_BUS_OFF
+state CANSM_BO_BUS_OFF_CHECK: call CanIf_GetTxConfirmationState(); && \n CanSM_UniversalTimer = CANSM_CANCEL_TIMER(0u);
+
+state CANSM_BO_TX_OFFLINE: call CanSM_FullComReached();
+state CANSM_SU_CC_STOPPED: Set by CanSM_Mainfunction \nwhen CanSM_RequestedComMode == COMM_FULL_COMMUNICATION &&\n CanSM_CurrentState > CANSM_S_SILENTCOM \n call CanSM_CtrlStoppedIndicated()
+state CANSM_SU_CC_STARTED: CanSM_CtrlStartedIndicated();
+state CanSM_CtrlStartedIndicated <<choice>>
+state CanSM_FullComReached <<choice>>
+
+
+state CANSM_S_SILENTCOM
+state CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL
+
+note right of CANSM_S_NO_BUS_OFF
+    The state kept here unless a bus off interrupt occurs.
+end note
+
+
+CANSM_S_NOCOM --> CANSM_SU_CC_STOPPED
+
+CANSM_BO_BUS_OFF_CHECK -down--> CANSM_S_NO_BUS_OFF: if(CanSM_TxNotificationStatus == CANIF_TX_RX_NOTIFICATION)
+
+
+[*] -down-> CANSM_SD_CC_STOPPED
+CANSM_SD_CC_STOPPED -> CANSM_SD_CC_SLEEP
+
+
+CANSM_BO_TX_OFFLINE -> CanSM_FullComReached
+CanSM_FullComReached -up----> CANSM_BO_BUS_OFF_CHECK: CanSM_RequestedComMode == COMM_FULL_COMMUNICATION && \n CanSM_BusOffFlag == FALSE
+CanSM_FullComReached ----down-> CANSM_SU_CC_STARTED: CanSM_RequestedComMode == COMM_FULL_COMMUNICATION && \n CanSM_BusOffFlag == TRUE
+CanSM_FullComReached -up-> CANSM_S_SILENTCOM: CanSM_RequestedComMode != COMM_FULL_COMMUNICATION
+
+
+
+CANSM_S_NO_BUS_OFF -down-> CANSM_SU_CC_STARTED: BO
+CANSM_BO_BUS_OFF_CHECK --> CANSM_SU_CC_STARTED: BO
+CANSM_SU_CC_STARTED -> CanSM_CtrlStartedIndicated
+
+CanSM_CtrlStartedIndicated -down-> CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
+CanSM_CtrlStartedIndicated -up-> CanSM_FullComReached: CanSM_BusOffCounter == CANSM_BOR_NONE && \n CanSM_RequestedComMode != COMM_NO_COMMUNICATION
+CanSM_CtrlStartedIndicated -> CANSM_BO_TX_OFFLINE: CanSM_RequestedComMode != COMM_NO_COMMUNICATION && \n CanSM_BusOffCounter != CANSM_BOR_NONE
+
+CANSM_SU_CC_STOPPED -right-> CANSM_SU_CC_STARTED
+
+CANSM_SD_CC_SLEEP -> CANSM_S_NOCOM
+@enduml
+
