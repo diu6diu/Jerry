@@ -18,11 +18,13 @@ state CanSM_FullComReached <<choice>>
 state CANSM_S_SILENTCOM
 state CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL
 
+CANSM_S_SILENTCOM -> [*]: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
+
 note right of CANSM_S_NO_BUS_OFF
     The state kept here unless a bus off interrupt occurs.
 end note
 
-
+CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL -left-> CANSM_SU_CC_STOPPED
 CANSM_S_NOCOM --> CANSM_SU_CC_STOPPED
 
 CANSM_BO_BUS_OFF_CHECK -down--> CANSM_S_NO_BUS_OFF: if(CanSM_TxNotificationStatus == CANIF_TX_RX_NOTIFICATION)
@@ -43,12 +45,14 @@ CANSM_S_NO_BUS_OFF -down-> CANSM_SU_CC_STARTED: BO
 CANSM_BO_BUS_OFF_CHECK --> CANSM_SU_CC_STARTED: BO
 CANSM_SU_CC_STARTED -> CanSM_CtrlStartedIndicated
 
-CanSM_CtrlStartedIndicated -down-> CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
+CanSM_CtrlStartedIndicated -down----> CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
 CanSM_CtrlStartedIndicated -up-> CanSM_FullComReached: CanSM_BusOffCounter == CANSM_BOR_NONE && \n CanSM_RequestedComMode != COMM_NO_COMMUNICATION
 CanSM_CtrlStartedIndicated -> CANSM_BO_TX_OFFLINE: CanSM_RequestedComMode != COMM_NO_COMMUNICATION && \n CanSM_BusOffCounter != CANSM_BOR_NONE
 
 CANSM_SU_CC_STOPPED -right-> CANSM_SU_CC_STARTED
 
 CANSM_SD_CC_SLEEP -> CANSM_S_NOCOM
+
+
 @enduml
 

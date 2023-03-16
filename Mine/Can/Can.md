@@ -121,7 +121,7 @@
    >
    > The received bit is compared against the transmitted bit at the Secondary Sample Point. The Secondary Sample Point position is defined as the sum of the measured delay from the M_CAN’s transmit output TX through the transceiver to the receive input RX plus ***the transmitter delay compensation offset as configured by TDCRi (i=0- 3).TDCO***. The transmitter delay compensation offset is used to adjust the position of the SSP inside the received bit (e.g. half of the bit time in the data phase). The position of the secondary sample point is rounded down to the next integer number of mtq.PSRi.TDCV shows the actual transmitter delay compensation value. PSRi (i=0- 3).TDCV is cleared when CCCRi.INIT is set and is updated at each transmission of an FD frame while DBTPi (i=0- 3).TDC is set.
 
-  ![Second Sample Point](.\SSP.png)
+  ![Second Sample Point](./SSP.png)
 
 #### ***同步***
 
@@ -190,11 +190,11 @@ typedef struct DataTypeB
 
    ***Multiplexor Signal必须是Enum类型，并且需要独立于Signal Group之外。***
 
-   ![image-20230309131821100](.\Can_MultiplexSignal.png)
+   ![image-20230309131821100](./Can_MultiplexSignal.png)
 
    Multiplexed Signal还需要配置Multiplex Value, 即对应Multiplexor Signal的哪个值。所有配置了相同Multiplex Value的Signals会被组合成一个Ipdu。
 
-   ![image-20230309132335597](.\DBC_MultiplexedSignal.png)
+   ![image-20230309132335597](./DBC_MultiplexedSignal.png)
 
    导入DaVinci后即可正确生成IpduM模块。
 
@@ -251,14 +251,14 @@ IpduM模块负责将从COM接收到的适当的Signal与发送回发送端路由
 
 TC357 CAN Module资源情况如下所示：*Ref. TC35X_um_appx_V1.1.0.pdf*
 
-![TC357_MCMCAN](.\TC357_MCMCAN.png)
+![TC357_MCMCAN](./TC357_MCMCAN.png)
 
 提示：上图中的Controller用“Node”表示。由上可以看出，２个CAN Module，共８个Controller。每个CAN Controller可用32个发送Tx Buffer...对于发送缓冲区，每个CAN Controller可用32个发送缓冲区，如果配置了32个Tx Dedicated Buffer，则没有空间配置Tx FIFO/Queue。一般，Tx Buffer配置时，会混合使用，比如：
 
 20 Tx Dedicated Buffer+ 12 Tx Queue
 MCMCANModule RAM区地址划分顺序如下所示：*Ref. AURIXTC3XX_um_part2_v1.2.0*
 
-![image-20230310132646731](.\MCMCANModule_RAM.jpg)
+![image-20230310132646731](./MCMCANModule_RAM.jpg)
 
 ### ***Mailbox、HRH、HWObject***
 
@@ -272,7 +272,7 @@ MCMCANModule RAM区地址划分顺序如下所示：*Ref. AURIXTC3XX_um_part2_v1
 
 Mailbox、HWObject、HRH、HTH、Controller、Transceiver之间的关系如下所示：
 
-![Mailbox HRH HTH HWobject](.\Mailbox_HRH_HWobject.jpg)
+![Mailbox HRH HTH HWobject](./Mailbox_HRH_HWobject.jpg)
 
 ### **FullCAN和BasicCAN是什么**
 
@@ -360,7 +360,7 @@ CanIf可以通过设置CANIF_HRHRANGE_LOWER_CANID、CANIF_HRHRANGE_UPPER_CANID�
 被动错误
 总线关闭
 
-![Node_status_transition_diagram](.\Node_status_transition_diagram.png)
+![Node_status_transition_diagram](./Node_status_transition_diagram.png)
 
 - 主动错误：
 处于主动错误状态的节点能正常参与总线通信的收发，当检测到错误时将发送主动错误标志，错误标志由6个连续的显性位组成（这种连续的6个显性位与常规的填充位和其它帧固定格式不相同，正因为如此，硬件才容易区别）。
@@ -389,8 +389,70 @@ CanIf可以通过设置CANIF_HRHRANGE_LOWER_CANID、CANIF_HRHRANGE_UPPER_CANID�
 
 3. 恢复到正常 CAN 通信
 
-![image-20230310155424134](.\BusOff_Recorver.png)
+![image-20230310155424134](./BusOff_Recorver.png)
 
 ### State Machine  
 
-![image-20230310155424134](.\CanBusOff_State_Machine_without_TRVC.png)
+```PlantUML
+@startuml CanBusOff State Machine without TRVC
+scale 1000 width
+note "BO: Busoff interrupt occured" as N1
+state Init {
+    state CANSM_SD_CC_STOPPED
+    state CANSM_SD_CC_SLEEP
+    state CANSM_S_NOCOM
+}
+
+state CANSM_S_NO_BUS_OFF
+state CANSM_BO_BUS_OFF_CHECK: call CanIf_GetTxConfirmationState(); && \n CanSM_UniversalTimer = CANSM_CANCEL_TIMER(0u);
+
+state CANSM_BO_TX_OFFLINE: call CanSM_FullComReached();
+state CANSM_SU_CC_STOPPED: Set by CanSM_Mainfunction \nwhen CanSM_RequestedComMode == COMM_FULL_COMMUNICATION &&\n CanSM_CurrentState > CANSM_S_SILENTCOM \n call CanSM_CtrlStoppedIndicated()
+state CANSM_SU_CC_STARTED: CanSM_CtrlStartedIndicated();
+state CanSM_CtrlStartedIndicated <<choice>>
+state CanSM_FullComReached <<choice>>
+
+
+state CANSM_S_SILENTCOM
+state CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL
+
+CANSM_S_SILENTCOM -> [*]: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
+
+note right of CANSM_S_NO_BUS_OFF
+    The state kept here unless a bus off interrupt occurs.
+end note
+
+CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL -left-> CANSM_SU_CC_STOPPED
+CANSM_S_NOCOM --> CANSM_SU_CC_STOPPED
+
+CANSM_BO_BUS_OFF_CHECK -down--> CANSM_S_NO_BUS_OFF: if(CanSM_TxNotificationStatus == CANIF_TX_RX_NOTIFICATION)
+
+
+[*] -down-> CANSM_SD_CC_STOPPED
+CANSM_SD_CC_STOPPED -> CANSM_SD_CC_SLEEP
+
+
+CANSM_BO_TX_OFFLINE -> CanSM_FullComReached
+CanSM_FullComReached -up----> CANSM_BO_BUS_OFF_CHECK: CanSM_RequestedComMode == COMM_FULL_COMMUNICATION && \n CanSM_BusOffFlag == FALSE
+CanSM_FullComReached ----down-> CANSM_SU_CC_STARTED: CanSM_RequestedComMode == COMM_FULL_COMMUNICATION && \n CanSM_BusOffFlag == TRUE
+CanSM_FullComReached -up-> CANSM_S_SILENTCOM: CanSM_RequestedComMode != COMM_FULL_COMMUNICATION
+
+
+
+CANSM_S_NO_BUS_OFF -down-> CANSM_SU_CC_STARTED: BO
+CANSM_BO_BUS_OFF_CHECK --> CANSM_SU_CC_STARTED: BO
+CANSM_SU_CC_STARTED -> CanSM_CtrlStartedIndicated
+
+CanSM_CtrlStartedIndicated -down----> CANSM_S_STARTWAKEUPSOURCES_SUCCESSFUL: CanSM_RequestedComMode == COMM_NO_COMMUNICATION
+CanSM_CtrlStartedIndicated -up-> CanSM_FullComReached: CanSM_BusOffCounter == CANSM_BOR_NONE && \n CanSM_RequestedComMode != COMM_NO_COMMUNICATION
+CanSM_CtrlStartedIndicated -> CANSM_BO_TX_OFFLINE: CanSM_RequestedComMode != COMM_NO_COMMUNICATION && \n CanSM_BusOffCounter != CANSM_BOR_NONE
+
+CANSM_SU_CC_STOPPED -right-> CANSM_SU_CC_STARTED
+
+CANSM_SD_CC_SLEEP -> CANSM_S_NOCOM
+
+
+@enduml
+
+
+```
