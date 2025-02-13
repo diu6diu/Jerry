@@ -1,0 +1,32 @@
+@startuml SENT Protocol Communication
+participant "Application" as APP
+participant "Message Manager" as MM
+participant "Port Handler" as PH
+participant "SENT Driver" as DRV
+participant "Hardware" as HW
+
+== Initialization ==
+APP -> MM: Initialize SENT
+MM -> PH: Configure Ports
+PH -> DRV: Setup Hardware
+DRV -> HW: Configure SENT Module
+
+== Normal Operation ==
+HW -> DRV: SENT Frame Received
+DRV -> PH: Process Raw Data
+PH -> MM: Format Message
+MM -> APP: Deliver Data
+
+== Error Handling ==
+HW -> DRV: CRC Error
+DRV -> PH: Error Status
+PH -> MM: Error Notification
+MM -> APP: Error Report
+
+== Message Transmission ==
+APP -> MM: Send Message
+MM -> PH: Format Frame
+PH -> DRV: Prepare Transmission
+DRV -> HW: Transmit Frame
+
+@enduml

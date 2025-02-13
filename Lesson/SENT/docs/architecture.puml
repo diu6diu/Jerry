@@ -1,0 +1,43 @@
+@startuml SENT Protocol Stack Architecture
+
+package "Application Layer" {
+    [SENT Calibration] as SC
+    [SENT Message Control] as SMC
+    [SENT Message Handler] as SMH
+    [SENT Global Processing] as SGP
+    [SENT Message Manager] as SMM
+    [SENT NVM Handler] as SNH
+}
+
+package "HAL Layer" {
+    [SENT Port] as SP
+    [SENT IO] as SIO
+    [SENT Device Interface] as SDI
+}
+
+package "Driver Layer" {
+    [SENT Driver] as SD
+    [SENT Hardware] as SH
+    [SENT Initializer] as SI
+}
+
+' 层级关系
+' "Application Layer" ..> HAL Layer
+' "HAL Layer" ..> Driver Layer
+
+' 详细依赖关系
+SC --> SP
+SMC --> SP
+SMH --> SIO
+SGP --> SDI
+SMM --> SP
+SNH --> SIO
+
+SP --> SD
+SIO --> SD
+SDI --> SD
+
+SD --> SH
+SI --> SH
+
+@enduml
